@@ -13,10 +13,13 @@ use App\Http\Middleware\SoloAlumnos;
 // Importamos el controlador del Profesor
 use App\Http\Controllers\Profesor\CursoController as ProfesorCursoController;
 
-// Importamos el controlador del Alumno
+// Importamos los controladores del Alumno
 use App\Http\Controllers\Alumno\DashboardController as AlumnoDashboardController;
 use App\Http\Controllers\Alumno\ExplorarController;
 use App\Http\Controllers\Alumno\SalaClasesController; 
+use App\Http\Controllers\Alumno\CertificacionController; 
+// NUEVO: Importamos el controlador de Turnos para el calendario
+use App\Http\Controllers\Alumno\TurnoController;
 
 use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +39,7 @@ Route::get('/dashboard', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
 
     if ($user->rol === 'admin') {
-        return redirect()->route('admin.cursos.index');
+        return redirect()->route('admin.alumnos.index');
     }
     if ($user->rol === 'profesor') {
         return redirect()->route('profesor.cursos.index');
@@ -63,14 +66,11 @@ Route::middleware('auth')->group(function () {
 
     // ZONA ADMINISTRADOR
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
-        // Cursos 
-        Route::get('/cursos', [AdminCursoController::class, 'index'])->name('cursos.index');
-        Route::get('/cursos/crear', [AdminCursoController::class, 'create'])->name('cursos.create');
-        Route::post('/cursos', [AdminCursoController::class, 'store'])->name('cursos.store');
-        Route::get('/cursos/{id}/editar', [AdminCursoController::class, 'edit'])->name('cursos.edit');
-        Route::post('/cursos/{id}/actualizar', [AdminCursoController::class, 'update'])->name('cursos.update');
-        Route::delete('/cursos/{id}/eliminar', [AdminCursoController::class, 'destroy'])->name('cursos.destroy');
-        Route::delete('/archivos/{id}', [AdminCursoController::class, 'eliminarArchivo'])->name('archivos.destroy');
+
+        //control de costos
+       Route::get('/admin/control-costos', function () {
+        return Inertia::render('Admin/ControlCostos'); 
+            })->name('control-costos');
 
         // Usuarios
         Route::get('/estadisticas', [UsuarioController::class, 'estadisticas'])->name('estadisticas');
@@ -104,58 +104,63 @@ Route::middleware('auth')->group(function () {
     // ZONA ALUMNOS 
     Route::prefix('alumno')->name('alumno.')->middleware([SoloAlumnos::class])->group(function () {
     
-    Route::get('/dashboard', [AlumnoDashboardController::class, 'index'])->name('dashboard');
-    
-    Route::get('/explorar', [ExplorarController::class, 'index'])->name('explorar');
-    
-    Route::post('/inscribir/{curso}', [ExplorarController::class, 'inscribir'])->name('inscribir');
-    
-    Route::get('/cursos/{curso}', [SalaClasesController::class, 'show'])->name('cursos.show');
+        Route::get('/dashboard', [AlumnoDashboardController::class, 'index'])->name('dashboard');
+        
+        Route::get('/explorar', [ExplorarController::class, 'index'])->name('explorar');
+        
+        Route::post('/inscribir/{curso}', [ExplorarController::class, 'inscribir'])->name('inscribir');
+        
+        Route::get('/cursos/{curso}', [SalaClasesController::class, 'show'])->name('cursos.show');
 
-    Route::post('/modulos/{modulo}/completar', [SalaClasesController::class, 'completarModulo'])->name('modulos.completar');
+        Route::post('/modulos/{modulo}/completar', [SalaClasesController::class, 'completarModulo'])->name('modulos.completar');
 
-    Route::get('/cursos/{curso}/examen', [SalaClasesController::class, 'examen'])->name('examen.show');
+        Route::get('/cursos/{curso}/examen', [SalaClasesController::class, 'examen'])->name('examen.show');
 
-    Route::post('/cursos/{curso}/examen/finalizar', [SalaClasesController::class, 'finalizarExamen'])->name('examen.finalizar');
+        Route::post('/cursos/{curso}/examen/finalizar', [SalaClasesController::class, 'finalizarExamen'])->name('examen.finalizar');
 
-    Route::get('/cursos/{curso}/certificado', [App\Http\Controllers\Alumno\SalaClasesController::class, 'verCertificado'])->name('cursos.certificado');
-});
+        Route::get('/cursos/{curso}/certificado', [SalaClasesController::class, 'verCertificado'])->name('cursos.certificado');
 
-Route::get('/mis-logros', function () {
-    $user = Auth::user();
+        Route::get('/mis-certificaciones', [CertificacionController::class, 'index'])->name('certificaciones');
 
-    $inscripcionesCompletadas = Inscripcion::with('curso')
-        ->where('alumno_id', $user->id) 
-        ->whereNotNull('fecha_termino') 
-        ->get();
-
-    $cursos = $inscripcionesCompletadas->map(function ($inscripcion) {
-        return [
-            'id' => $inscripcion->curso->id,
-            'titulo' => $inscripcion->curso->titulo, 
-            'fecha_termino' => Carbon::parse($inscripcion->fecha_termino)->translatedFormat('d \d\e F, Y'),
-        ];
+        // NUEVO: Ruta para visualizar el calendario con los turnos y disponibilidad
+        Route::get('/mis-turnos', [TurnoController::class, 'index'])->name('turnos.index');
     });
 
-    $certificados = $inscripcionesCompletadas->map(function ($inscripcion) {
-        
-        $rutaCertificado = $inscripcion->curso->archivo_certificado;
-        
-        $urlDescarga = $rutaCertificado ? asset('storage/' . $rutaCertificado) : '#';
+    Route::get('/mis-logros', function () {
+        $user = Auth::user();
 
-        return [
-            'id' => $inscripcion->id,
-            'titulo' => 'Certificado: ' . $inscripcion->curso->titulo,
-            'fecha_obtencion' => Carbon::parse($inscripcion->fecha_termino)->translatedFormat('d \d\e F, Y'),
-            'url_descarga' => $urlDescarga, 
-        ];
-    });
+        $inscripcionesCompletadas = Inscripcion::with('curso')
+            ->where('alumno_id', $user->id) 
+            ->whereNotNull('fecha_termino') 
+            ->get();
 
-    return Inertia::render('Alumno/MisLogros', [
-        'cursos' => $cursos,
-        'certificados' => $certificados
-    ]);
-})->middleware(['auth', 'verified'])->name('mis-logros');
+        $cursos = $inscripcionesCompletadas->map(function ($inscripcion) {
+            return [
+                'id' => $inscripcion->curso->id,
+                'titulo' => $inscripcion->curso->titulo, 
+                'fecha_termino' => Carbon::parse($inscripcion->fecha_termino)->translatedFormat('d \d\e F, Y'),
+            ];
+        });
+
+        $certificados = $inscripcionesCompletadas->map(function ($inscripcion) {
+            
+            $rutaCertificado = $inscripcion->curso->archivo_certificado;
+            
+            $urlDescarga = $rutaCertificado ? asset('storage/' . $rutaCertificado) : '#';
+
+            return [
+                'id' => $inscripcion->id,
+                'titulo' => 'Certificado: ' . $inscripcion->curso->titulo,
+                'fecha_obtencion' => Carbon::parse($inscripcion->fecha_termino)->translatedFormat('d \d\e F, Y'),
+                'url_descarga' => $urlDescarga, 
+            ];
+        });
+
+        return Inertia::render('Alumno/MisLogros', [
+            'cursos' => $cursos,
+            'certificados' => $certificados
+        ]);
+    })->middleware(['auth', 'verified'])->name('mis-logros');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

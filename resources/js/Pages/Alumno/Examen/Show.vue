@@ -50,7 +50,15 @@
                     </div>
 
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-8 min-h-[300px]">
-                        <h3 class="font-bold text-slate-900 mb-2">Pregunta {{ indiceActual + 1 }}</h3>
+                        
+                        <!-- MODIFICACIÓN: Contenedor flex para el título de la pregunta y el botón de voz -->
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-900">Pregunta {{ indiceActual + 1 }}</h3>
+                            
+                            <!-- Implementación del botón de voz que lee el enunciado -->
+                            <BotonVoz :texto="preguntaActual.texto_pregunta" />
+                        </div>
+                        
                         <p class="text-slate-700 text-lg mb-8">{{ preguntaActual.texto_pregunta }}</p>
 
                         <div v-if="preguntaActual.tipo === 'multiple'" class="space-y-3">
@@ -110,6 +118,8 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+// MODIFICACIÓN: Importamos el nuevo componente BotonVoz
+import BotonVoz from '@/Components/BotonVoz.vue'; 
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 

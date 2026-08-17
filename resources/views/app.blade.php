@@ -10,6 +10,19 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Google Analytics -->
+        @if(env('VITE_GOOGLE_ANALYTICS_ID'))
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('VITE_GOOGLE_ANALYTICS_ID') }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                // Desactivamos la vista de página inicial automática; Inertia lo hará en app.js
+                gtag('config', '{{ env('VITE_GOOGLE_ANALYTICS_ID') }}', { send_page_view: false });
+            </script>
+        @endif
+
         <!-- Scripts -->
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
