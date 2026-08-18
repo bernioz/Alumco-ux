@@ -194,6 +194,7 @@
 </template>
 
 <script setup>
+import { v4 as uuidv4 } from 'uuid';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
