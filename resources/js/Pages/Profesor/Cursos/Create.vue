@@ -6,181 +6,181 @@
             <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
                 
                 <div class="mb-6 flex items-center gap-4">
-                    <Link :href="route('profesor.cursos.index')" class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition">
+                    <Link :href="route('profesor.cursos.index')" class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition">
                         <span>&larr;</span> Volver
                     </Link>
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-800">Crear Nuevo Curso</h2>
-                        <p class="text-slate-500 text-sm">Completa la información del curso, módulos y examen</p>
+                        <h2 class="text-2xl font-bold text-slate-800 dark:text-white">Crear Nuevo Curso</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">Completa la información del curso, módulos y examen</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-100 p-1 rounded-xl flex gap-1 mb-6">
-                    <button type="button" @click="tabActiva = 1" :class="tabActiva === 1 ? 'bg-white shadow-sm text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-700'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
+                <div class="bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl flex gap-1 mb-6">
+                    <button type="button" @click="tabActiva = 1" :class="tabActiva === 1 ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
                         Información General
                     </button>
-                    <button type="button" @click="tabActiva = 2" :class="tabActiva === 2 ? 'bg-white shadow-sm text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-700'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
+                    <button type="button" @click="tabActiva = 2" :class="tabActiva === 2 ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
                         Módulos y Contenido
                     </button>
-                    <button type="button" @click="tabActiva = 3" :class="tabActiva === 3 ? 'bg-white shadow-sm text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-700'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
+                    <button type="button" @click="tabActiva = 3" :class="tabActiva === 3 ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'" class="flex-1 py-2.5 px-4 rounded-lg text-sm transition-all duration-200">
                         Examen Final
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
                     <form @submit.prevent="submit" class="p-8">
                         
                         <div v-show="tabActiva === 1">
                             <div class="mb-6">
-                                <h3 class="text-lg font-bold text-slate-800">Información del Curso</h3>
-                                <p class="text-sm text-slate-500">Datos básicos que verán los estudiantes</p>
+                                <h3 class="text-lg font-bold text-slate-800 dark:text-white">Información del Curso</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Datos básicos que verán los estudiantes</p>
                             </div>
 
                             <div class="mb-6">
-                                <label class="block text-sm font-medium text-slate-700 mb-2">Título del Curso</label>
-                                <input type="text" v-model="form.titulo" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm" placeholder="Escriba aqui el título de su capacitación" />
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Título del Curso</label>
+                                <input type="text" v-model="form.titulo" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg shadow-sm placeholder-slate-400 dark:placeholder-slate-500" placeholder="Escriba aqui el título de su capacitación" />
                             </div>
 
                             <div class="mb-6">
-                                <label class="block text-sm font-medium text-slate-700 mb-2">Descripción</label>
-                                <textarea v-model="form.descripcion" rows="4" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm" placeholder="Describe de qué trata el curso y qué aprenderán los estudiantes..."></textarea>
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Descripción</label>
+                                <textarea v-model="form.descripcion" rows="4" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg shadow-sm placeholder-slate-400 dark:placeholder-slate-500" placeholder="Describe de qué trata el curso y qué aprenderán los estudiantes..."></textarea>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
                                 <div>
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Imagen del Curso (Portada)</label>
-                                    <div class="w-full bg-slate-50 border border-slate-200 border-dashed rounded-lg p-4 flex items-center justify-center">
-                                        <input type="file" @change="manejarSubidaImagen" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer" />
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Imagen del Curso (Portada)</label>
+                                    <div class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 border-dashed rounded-lg p-4 flex items-center justify-center">
+                                        <input type="file" @change="manejarSubidaImagen" accept="image/*" class="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer" />
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Certificado de Aprobación</label>
-                                    <div class="w-full bg-slate-50 border border-slate-200 border-dashed rounded-lg p-4 flex items-center justify-center">
-                                        <input type="file" @change="manejarSubidaCertificado" accept=".pdf,image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer" />
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Certificado de Aprobación</label>
+                                    <div class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 border-dashed rounded-lg p-4 flex items-center justify-center">
+                                        <input type="file" @change="manejarSubidaCertificado" accept=".pdf,image/*" class="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer" />
                                     </div>
-                                    <p class="text-xs text-slate-500 mt-2">Sube el PDF o Imagen que se entregará al alumno cuando apruebe.</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Sube el PDF o Imagen que se entregará al alumno cuando apruebe.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div v-show="tabActiva === 2">
                             <div class="mb-6">
-                                <h3 class="text-lg font-bold text-slate-800">Módulos del Curso</h3>
-                                <p class="text-sm text-slate-500">Agrega el contenido, videos y documentos descargables.</p>
+                                <h3 class="text-lg font-bold text-slate-800 dark:text-white">Módulos del Curso</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Agrega el contenido, videos y documentos descargables.</p>
                             </div>
 
-                            <div v-for="(modulo, index) in form.modulos" :key="index" class="mb-6 p-6 border border-slate-200 rounded-xl bg-white relative">
-                                <button type="button" @click="eliminarModulo(index)" class="absolute top-4 right-4 text-red-500 hover:text-red-700 text-sm font-medium" v-if="form.modulos.length > 1">
+                            <div v-for="(modulo, index) in form.modulos" :key="index" class="mb-6 p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/80 relative">
+                                <button type="button" @click="eliminarModulo(index)" class="absolute top-4 right-4 text-red-500 hover:text-red-700 dark:hover:text-red-400 text-sm font-medium" v-if="form.modulos.length > 1">
                                     Eliminar
                                 </button>
                                 
-                                <h4 class="font-bold text-slate-800 mb-4">Módulo {{ index + 1 }}</h4>
+                                <h4 class="font-bold text-slate-800 dark:text-white mb-4">Módulo {{ index + 1 }}</h4>
                                 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Título del Módulo</label>
-                                    <input type="text" v-model="modulo.titulo" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" placeholder="Escriba aqui el título de su módulo" />
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Título del Módulo</label>
+                                    <input type="text" v-model="modulo.titulo" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" placeholder="Escriba aqui el título de su módulo" />
                                 </div>
 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Contenido (Texto)</label>
-                                    <textarea v-model="modulo.contenido" rows="3" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" placeholder="Escribe el contenido del módulo aquí..."></textarea>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Contenido (Texto)</label>
+                                    <textarea v-model="modulo.contenido" rows="3" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" placeholder="Escribe el contenido del módulo aquí..."></textarea>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-slate-700 mb-2">Duración (Opcional)</label>
-                                        <input type="text" v-model="modulo.duracion" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" placeholder="Ej: 60 min" />
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Duración (Opcional)</label>
+                                        <input type="text" v-model="modulo.duracion" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" placeholder="Ej: 60 min" />
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-slate-700 mb-2">Enlace al Video (Drive/YouTube)</label>
-                                        <input type="url" v-model="modulo.link_video" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" placeholder="https://drive.google.com/..." />
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Enlace al Video (Drive/YouTube)</label>
+                                        <input type="url" v-model="modulo.link_video" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" placeholder="https://drive.google.com/..." />
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Archivos y Recursos</label>
-                                    <input type="file" multiple @change="(e) => manejarArchivosModulo(e, index)" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer" />
-                                    <p class="text-xs text-slate-400 mt-1">Puedes seleccionar múltiples archivos (PDF, Word, Excel).</p>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Archivos y Recursos</label>
+                                    <input type="file" multiple @change="(e) => manejarArchivosModulo(e, index)" class="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-100 dark:file:bg-slate-700 file:text-slate-700 dark:file:text-slate-200 hover:file:bg-slate-200 dark:hover:file:bg-slate-600 cursor-pointer" />
+                                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">Puedes seleccionar múltiples archivos (PDF, Word, Excel).</p>
                                 </div>
                             </div>
 
-                            <button type="button" @click="agregarModulo" class="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-600 font-medium hover:border-slate-400 hover:bg-slate-50 transition flex justify-center items-center gap-2">
+                            <button type="button" @click="agregarModulo" class="w-full py-3 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl text-slate-600 dark:text-slate-400 font-medium hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition flex justify-center items-center gap-2">
                                 <span>+</span> Agregar Módulo
                             </button>
                         </div>
 
                         <div v-show="tabActiva === 3">
-                            <div class="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
-                                <h3 class="text-lg font-bold text-slate-800 mb-4">Configuración del Examen</h3>
+                            <div class="mb-8 p-6 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4">Configuración del Examen</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-slate-700 mb-2">Puntuación Mínima para Aprobar (%)</label>
-                                        <input type="number" v-model="form.exigencia_minima" min="1" max="100" class="w-full border-slate-300 rounded-lg shadow-sm focus:border-blue-500" placeholder="70" />
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Puntuación Mínima para Aprobar (%)</label>
+                                        <input type="number" v-model="form.exigencia_minima" min="1" max="100" class="w-full bg-white dark:bg-slate-900 dark:text-white border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:border-blue-500 placeholder-slate-400 dark:placeholder-slate-500" placeholder="70" />
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-slate-700 mb-2">Intentos Permitidos</label>
-                                        <input type="number" v-model="form.max_intentos" min="1" class="w-full border-slate-300 rounded-lg shadow-sm focus:border-blue-500" placeholder="2" />
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Intentos Permitidos</label>
+                                        <input type="number" v-model="form.max_intentos" min="1" class="w-full bg-white dark:bg-slate-900 dark:text-white border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:border-blue-500 placeholder-slate-400 dark:placeholder-slate-500" placeholder="2" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div v-for="(pregunta, index) in form.preguntas" :key="index" class="mb-6 p-6 border border-slate-200 rounded-xl bg-white relative">
-                                <button type="button" @click="eliminarPregunta(index)" class="absolute top-4 right-4 text-red-500 hover:text-red-700 text-sm font-medium" v-if="form.preguntas.length > 1">
+                            <div v-for="(pregunta, index) in form.preguntas" :key="index" class="mb-6 p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/80 relative">
+                                <button type="button" @click="eliminarPregunta(index)" class="absolute top-4 right-4 text-red-500 hover:text-red-700 dark:hover:text-red-400 text-sm font-medium" v-if="form.preguntas.length > 1">
                                     Eliminar
                                 </button>
                                 
                                 <div class="flex items-center gap-4 mb-4">
-                                    <h4 class="font-bold text-slate-800">Pregunta {{ index + 1 }}</h4>
-                                    <select v-model="pregunta.tipo" class="text-sm border-slate-300 rounded-lg py-1.5 pl-3 pr-10 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-200 focus:border-blue-500 cursor-pointer">
+                                    <h4 class="font-bold text-slate-800 dark:text-white">Pregunta {{ index + 1 }}</h4>
+                                    <select v-model="pregunta.tipo" class="text-sm border-slate-300 dark:border-slate-700 rounded-lg py-1.5 pl-3 pr-10 bg-slate-50 dark:bg-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:border-blue-500 cursor-pointer">
                                         <option value="multiple">Selección Múltiple</option>
                                         <option value="vf">Verdadero o Falso</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Enunciado</label>
-                                    <textarea v-model="pregunta.texto" rows="2" class="w-full bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" placeholder="Escribe tu pregunta aquí..."></textarea>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Enunciado</label>
+                                    <textarea v-model="pregunta.texto" rows="2" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" placeholder="Escribe tu pregunta aquí..."></textarea>
                                 </div>
 
                                 <div v-if="pregunta.tipo === 'multiple'">
-                                    <label class="block text-sm font-medium text-slate-700 mb-2">Opciones (Marca el círculo de la correcta)</label>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Opciones (Marca el círculo de la correcta)</label>
                                     <div class="space-y-3">
                                         <div v-for="(opcion, opIndex) in pregunta.opciones" :key="opIndex" class="flex items-center gap-3">
-                                            <input type="radio" :name="`pregunta_${index}`" :checked="opcion.es_correcta" @change="marcarCorrectaMultiple(index, opIndex)" class="text-blue-600 focus:ring-blue-500 w-5 h-5" />
-                                            <input type="text" v-model="opcion.texto" class="flex-1 bg-slate-50 border-transparent focus:bg-white focus:border-blue-500 rounded-lg" :placeholder="`Opción ${opIndex + 1}`" />
+                                            <input type="radio" :name="`pregunta_${index}`" :checked="opcion.es_correcta" @change="marcarCorrectaMultiple(index, opIndex)" class="text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-slate-600 w-5 h-5" />
+                                            <input type="text" v-model="opcion.texto" class="flex-1 bg-slate-50 dark:bg-slate-900 dark:text-white dark:border-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-blue-500 rounded-lg placeholder-slate-400 dark:placeholder-slate-500" :placeholder="`Opción ${opIndex + 1}`" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div v-if="pregunta.tipo === 'vf'" class="space-y-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-slate-700 mb-2">Respuesta Correcta</label>
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Respuesta Correcta</label>
                                         <div class="flex items-center gap-6">
                                             <label class="flex items-center gap-2 cursor-pointer">
-                                                <input type="radio" v-model="pregunta.respuesta_vf" :value="true" :name="`vf_${index}`" class="text-blue-600 focus:ring-blue-500 w-5 h-5" />
-                                                <span>Verdadero</span>
+                                                <input type="radio" v-model="pregunta.respuesta_vf" :value="true" :name="`vf_${index}`" class="text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-slate-600 w-5 h-5" />
+                                                <span class="dark:text-slate-300">Verdadero</span>
                                             </label>
                                             <label class="flex items-center gap-2 cursor-pointer">
-                                                <input type="radio" v-model="pregunta.respuesta_vf" :value="false" :name="`vf_${index}`" class="text-blue-600 focus:ring-blue-500 w-5 h-5" />
-                                                <span>Falso</span>
+                                                <input type="radio" v-model="pregunta.respuesta_vf" :value="false" :name="`vf_${index}`" class="text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-slate-600 w-5 h-5" />
+                                                <span class="dark:text-slate-300">Falso</span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" @click="agregarPregunta" class="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-600 font-medium hover:border-slate-400 hover:bg-slate-50 transition flex justify-center items-center gap-2">
+                            <button type="button" @click="agregarPregunta" class="w-full py-3 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl text-slate-600 dark:text-slate-400 font-medium hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition flex justify-center items-center gap-2">
                                 <span>+</span> Agregar Pregunta
                             </button>
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-slate-200 mt-8 pt-6">
-                            <button type="button" @click="guardarCurso('borrador')" class="flex items-center gap-2 bg-white border border-slate-300 text-slate-700 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-50 transition shadow-sm">
+                        <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-700 mt-8 pt-6">
+                            <button type="button" @click="guardarCurso('borrador')" class="flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">
                                 Guardar Borrador
                             </button>
                             
-                            <button type="button" @click="guardarCurso('publicado')" class="flex items-center gap-2 bg-slate-900 text-white px-8 py-2.5 rounded-lg font-medium hover:bg-slate-800 transition shadow-sm">
+                            <button type="button" @click="guardarCurso('publicado')" class="flex items-center gap-2 bg-slate-900 dark:bg-blue-600 text-white px-8 py-2.5 rounded-lg font-medium hover:bg-slate-800 dark:hover:bg-blue-500 transition shadow-sm">
                                 Publicar Curso
                             </button>
                         </div>
@@ -194,7 +194,6 @@
 </template>
 
 <script setup>
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -205,7 +204,7 @@ const form = useForm({
     titulo: '',
     descripcion: '',
     imagen_portada: null,
-    archivo_certificado: null, 
+    ruta_certificado_pdf: null, 
     exigencia_minima: 70,
     max_intentos: 2,
     estado: 'borrador',
