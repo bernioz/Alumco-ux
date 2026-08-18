@@ -133,12 +133,14 @@ const changeFontSize = (step) => {
 
 // Cargar preferencias guardadas al montar el componente
 onMounted(() => {
-    // Revisar preferencia de modo oscuro
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    // Revisar preferencia de modo oscuro (Aislado del sistema operativo)
+    if (localStorage.getItem('theme') === 'dark') {
         isDarkMode.value = true;
         document.documentElement.classList.add('dark');
     } else {
+        isDarkMode.value = false;
         document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
     }
 
     // Revisar preferencia de tamaño de letra
