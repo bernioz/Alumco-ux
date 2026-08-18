@@ -30,8 +30,8 @@ class CursoController extends Controller
                 ? $request->file('imagen_portada')->store('portadas_cursos', 'public') 
                 : null;
 
-            $rutaCertificado = $request->hasFile('archivo_certificado') 
-                ? $request->file('archivo_certificado')->store('certificados', 'public') 
+            $rutaCertificado = $request->hasFile('ruta_certificado_pdf') 
+                ? $request->file('ruta_certificado_pdf')->store('certificados', 'public') 
                 : null;
 
             $curso = Curso::create([
@@ -42,7 +42,7 @@ class CursoController extends Controller
                 'max_intentos' => $request->max_intentos,
                 'estado' => $request->estado,
                 'imagen_portada' => $rutaImagen,
-                'archivo_certificado' => $rutaCertificado, 
+                'ruta_certificado_pdf' => $rutaCertificado, 
             ]);
 
             if ($request->has('modulos')) {
@@ -125,9 +125,9 @@ class CursoController extends Controller
                 $datosBasicos['imagen_portada'] = $request->file('imagen_portada')->store('portadas_cursos', 'public');
             }
 
-            if ($request->hasFile('archivo_certificado')) {
-                if ($curso->archivo_certificado) Storage::disk('public')->delete($curso->archivo_certificado);
-                $datosBasicos['archivo_certificado'] = $request->file('archivo_certificado')->store('certificados', 'public');
+            if ($request->hasFile('ruta_certificado_pdf')) {
+                if ($curso->ruta_certificado_pdf) Storage::disk('public')->delete($curso->ruta_certificado_pdf);
+                $datosBasicos['ruta_certificado_pdf'] = $request->file('ruta_certificado_pdf')->store('certificados', 'public');
             }
 
             $curso->update($datosBasicos);
@@ -198,7 +198,7 @@ class CursoController extends Controller
     {
         $curso = Curso::where('profesor_id', auth()->id())->findOrFail($id);
         if ($curso->imagen_portada) Storage::disk('public')->delete($curso->imagen_portada);
-        if ($curso->archivo_certificado) Storage::disk('public')->delete($curso->archivo_certificado);
+        if ($curso->ruta_certificado_pdf) Storage::disk('public')->delete($curso->ruta_certificado_pdf);
         $curso->delete();
 
         return redirect()->route('profesor.cursos.index')->with('success', 'Curso eliminado');
